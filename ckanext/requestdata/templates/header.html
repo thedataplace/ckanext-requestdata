@@ -25,7 +25,11 @@
       </li>
     {% endif %}
     <li>
+      {% if g.ckan_doc_version == "2.8" %}
+      <a href="{{ h.url_for('user.read', id=c.userobj.name) }}" class="image" title="{{ _('View profile') }}">
+      {% else %}
       <a href="{{ h.url_for(controller='user', action='read', id=c.userobj.name) }}" class="image" title="{{ _('View profile') }}">
+      {% endif %}
         {{ h.gravatar((c.userobj.email_hash if c and c.userobj else ''), size=22) }}
         <span class="username">{{ c.userobj.display_name }}</span>
       </a>
@@ -33,7 +37,11 @@
     {% set new_activities = h.new_activities() %}
     <li class="notifications {% if new_activities > 0 %}notifications-important{% endif %}">
       {% set notifications_tooltip = ngettext('Dashboard (%(num)d new item)', 'Dashboard (%(num)d new items)', new_activities) %}
+      {% if g.ckan_doc_version == "2.8" %}
+      <a href="{{ h.url_for('dashboard.index') }}" title="{{ notifications_tooltip }}">
+      {% else %}
       <a href="{{ h.url_for(controller='user', action='dashboard') }}" title="{{ notifications_tooltip }}">
+      {% endif %}
         <i class="icon-dashboard" aria-hidden="true"></i>
         <span class="text">{{ _('Dashboard') }}</span>
         <span class="badge">{{ new_activities }}</span>
@@ -41,7 +49,11 @@
     </li>
     {% block header_account_settings_link %}
       <li>
+        {% if g.ckan_doc_version == "2.8" %}
+        <a href="{{ h.url_for('user.edit', id=c.userobj.name) }}" title="{{ _('Edit settings') }}">
+        {% else %}
         <a href="{{ h.url_for(controller='user', action='edit', id=c.userobj.name) }}" title="{{ _('Edit settings') }}">
+        {% endif %}
           <i class="icon-cog" aria-hidden="true"></i>
           <span class="text">{{ _('Settings') }}</span>
         </a>

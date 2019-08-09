@@ -18,6 +18,9 @@ try:
 except ImportError:
     # Redirect is not redirect_to in CKAN 2.7
     redirect = h.redirect_to
+except AttributeError:
+    redirect = toolkit.redirect_to
+
 abort = base.abort
 tuplize_dict = logic.tuplize_dict
 parse_params = logic.parse_params

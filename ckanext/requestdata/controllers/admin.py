@@ -23,7 +23,10 @@ from ckan.common import response, request
 NotFound = logic.NotFound
 NotAuthorized = logic.NotAuthorized
 
-redirect = base.redirect
+try:
+    redirect = base.redirect
+except AttributeError:
+    redirect = toolkit.redirect_to
 abort = base.abort
 
 
